@@ -1,0 +1,90 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    threads:
+      max: 200
+      min-spare: 30
+    connection-timeout: 5000ms
+  port: 8080
+  servlet:
+    context-path: /emos-wx-api
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/emos?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: 123456
+      initial-size: 8
+      max-active: 16
+      min-idle: 8
+      max-wait: 60000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: abc123456
+    jedis:
+      pool:
+        max-active: 1000
+        max-wait: -1ms
+        max-idle: 16
+        min-idle: 8
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: emos
+      authentication-database: admin
+      username: admin
+      password: abc123456
+  mail:
+    default-encoding: UTF-8
+    host: smtp.163.com
+    username: lzb00712021@163.com
+    password: 159753456qweasd
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.example.emos.wx.db.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: info
+    com.example.emos.wx.db.dao : warn
+  pattern:
+    console: "%d{HH:mm:ss}  %-5level  %msg%n"
+
+emos:
+  jwt:
+    secret: abc123456
+    expire: 5
+    cache-expire: 10
+  face:
+    createFaceModelUrl: http://192.168.43.101:3000/create_face_model
+    checkinUrl: http://192.168.43.101:3000/checkin
+  email:
+    system: lzb00712021@163.com
+    hr: lzb00712021@163.com
+  image-folder: D:/emos/image
+  code: 7E9014C193C27AE3
+  recieveNotify: http://192.168.43.109:8080/emos-wx-api/meeting/recieveNotify
+workflow:
+  url: http://192.168.43.101:9090/emos-workflow
+
+trtc:
+  appid: 34343434
+  key: 33434
+  expire: 86400
+wx:
+  app-id: wxd028dff19a1ddd8c
+  app-secret: 810876e42239ebebd554988fde99dbae
